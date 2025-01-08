@@ -1,80 +1,27 @@
-# 🌟 CampusNexus: Connecting Talent, Opportunities, and Success Seamlessly
+# CampusNexusNG
 
-## ✨ Project Name
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
 
-**CampusNexus: Connecting Talent, Opportunities, and Success Seamlessly**
+## Development server
 
----
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## 📋 Requirements
+## Code scaffolding
 
-- 🚀 **Backend Framework**: Spring Boot
-- 🛢️ **Database**: MySQL
-- 🛠️ **ORM**: Hibernate
-- 📦 **Build Tool**: Maven
-- ✅ **Validation**: JSR 380 (Java Bean Validation)
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
----
+## Build
 
-## 👥 Contributors
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-- **[Mayur Dehade](mailto:dehademayur9@gmail.com)**
+## Running unit tests
 
----
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## ⚙️ Setup
+## Running end-to-end tests
 
-1. 📥 **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-repo/campus-management-system.git
-   ```
-2. 🛠️ **Configure the database** in `application.properties`:
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/campus_db
-   spring.datasource.username=root
-   spring.datasource.password=yourpassword
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
-   ```
-3. ▶️ **Build and run the project** using your IDE or Maven:
-   ```bash
-   mvn spring-boot:run
-   ```
-4. 🧪 **Test the APIs** using Postman or any REST client.
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-5. Access API
-   ```http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/```
+## Further help
 
----
-
-## 📂 Project Structure
-
-```
-src/
-├── main/
-│   ├── java/
-│   │   ├── com.campus/
-│   │   │   ├── controller/
-│   │   │   │   └── UserController.java
-│   │   │   ├── entity/
-│   │   │   │   └── User.java
-│   │   │   ├── enums/
-│   │   │   │   └── UserRoles.java
-│   │   │   ├── repository/
-│   │   │   │   └── UserRepository.java
-│   │   │   └── services/
-│   │   │       └── UserService.java
-│   └── resources/
-│       └── application.properties
-└── test/
-```
-
----
-
-## 🛠️ Technologies Used
-
-- 💻 **Backend Framework**: Spring Boot
-- 🛢️ **Database**: MySQL
-- 🛠️ **ORM**: Hibernate
-- 📦 **Build Tool**: Maven
-- ✅ **Validation**: JSR 380 (Java Bean Validation)
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
