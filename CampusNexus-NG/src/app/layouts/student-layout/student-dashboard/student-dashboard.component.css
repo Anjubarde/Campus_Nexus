@@ -1,0 +1,6 @@
+/* Hide the button on large screens */
+@media (min-width: 768px) {
+  button {
+    display: none;
+  }
+}

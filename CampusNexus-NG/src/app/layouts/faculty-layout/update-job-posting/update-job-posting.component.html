@@ -1,0 +1,128 @@
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <app-faculty-sidebar></app-faculty-sidebar>
+
+    <!-- Main Content -->
+    <div class="p-6 ml-8 bg-white w-full">
+        <div class="mb-6">
+            <button (click)="goBack()" class="flex items-center text-gray-600 hover:text-gray-800 mb-4">
+                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+        </div>
+
+        <div class="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1>Update Job Posting</h1>
+        </div>
+
+        <form [formGroup]="jobForm" (ngSubmit)="onSubmit()" class="max-w-4xl mx-auto">
+            <!-- Success/Error Messages -->
+            <div *ngIf="successMessage" class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                {{ successMessage }}
+            </div>
+            <div *ngIf="errorMessage" class="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
+                {{ errorMessage }}
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Left Column -->
+                <div class="space-y-4">
+                    <!-- Job Title -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+                        <input type="text" formControlName="job_title" 
+                               class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                        <div *ngIf="jobForm.get('job_title')?.invalid && jobForm.get('job_title')?.touched" 
+                             class="text-red-500 text-sm mt-1">
+                            Job title is required
+                        </div>
+                    </div>
+
+                    <!-- Company Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                        <input type="text" formControlName="companyName" 
+                               class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+
+                    <!-- Job Location -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                        <input type="text" formControlName="job_location" 
+                               class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+
+                    <!-- CTC -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">CTC</label>
+                        <input type="text" formControlName="ctc" 
+                               class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+
+                    <!-- Company URL -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Company Website</label>
+                        <input type="url" formControlName="company_url" 
+                               class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-4">
+                    <!-- Start Date -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                        <input type="datetime-local" formControlName="startDate" 
+                               class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+
+                    <!-- End Date -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                        <input type="datetime-local" formControlName="endDate" 
+                               class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+
+                    <!-- Eligibility Criteria -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Eligibility Criteria</label>
+                        <textarea formControlName="eligibilityCriteria" rows="3"
+                                  class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500"></textarea>
+                    </div>
+
+                    <!-- Active Status -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Active Status</label>
+                        <select formControlName="active" 
+                                class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                            <option [value]="true">Active</option>
+                            <option [value]="false">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Description -->
+            <div class="mt-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Job Description</label>
+                <textarea formControlName="job_description" rows="4"
+                          class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500"></textarea>
+                <div *ngIf="jobForm.get('job_description')?.invalid && jobForm.get('job_description')?.touched" 
+                     class="text-red-500 text-sm mt-1">
+                    Job description is required
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-8">
+                <button type="submit" [disabled]="jobForm.invalid || isSubmitting"
+                        class="w-full bg-sky-600 text-white py-2 px-6 rounded-md hover:bg-sky-700 transition-colors duration-200 font-medium disabled:bg-sky-300 disabled:cursor-not-allowed">
+                    <span *ngIf="!isSubmitting">Update Job Posting</span>
+                    <span *ngIf="isSubmitting">Updating...</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

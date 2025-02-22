@@ -1,0 +1,125 @@
+<nav
+    class="bg-gray-900 h-screen fixed top-0 left-0 min-w-[260px] py-6 px-4 font-[sans-serif] flex flex-col overflow-auto">
+    <!-- Profile Section -->
+    <div class="flex justify-end">
+        <a routerLink="/faculty/edit-profile" class="text-gray-300 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-gray-300 hover:fill-blue-700"
+                viewBox="0 0 348.882 348.882" width="24" height="24">
+                <path
+                    d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
+                    data-original="#000000" />
+                <path
+                    d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
+                    data-original="#000000" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="flex flex-col items-center pt-2">
+        <div class="bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center font-bold text-black text-xl">
+            {{ imagePreview }}
+        </div>
+        <div class="text-center mt-2">
+            <p class="text-base text-white">{{ userData.name.toUpperCase() }}</p>
+            <p class="text-xs text-gray-300 mt-1">{{ userData.email }}</p>
+            <p class="text-xs text-gray-300 mt-1">Role: {{ userData.role }}</p>
+        </div>
+    </div>
+
+    <hr class="my-6 border-gray-400">
+
+    <!-- Navigation Menu -->
+    <ul class="space-y-3 flex-1">
+        <!-- Dashboard -->
+        <li>
+            <a routerLink="/faculty/dashboard" routerLinkActive="bg-[#36336b] text-white"
+                class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-[#36336b] rounded px-4 py-3 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4 mr-4 ml-1"
+                    viewBox="0 0 512 512">
+                    <path
+                        d="M197.332 170.668h-160C16.746 170.668 0 153.922 0 133.332v-96C0 16.746 16.746 0 37.332 0h160c20.59 0 37.336 16.746 37.336 37.332v96c0 20.59-16.746 37.336-37.336 37.336zM37.332 32A5.336 5.336 0 0 0 32 37.332v96a5.337 5.337 0 0 0 5.332 5.336h160a5.338 5.338 0 0 0 5.336-5.336v-96A5.337 5.337 0 0 0 197.332 32zm160 480h-160C16.746 512 0 495.254 0 474.668v-224c0-20.59 16.746-37.336 37.332-37.336h160c20.59 0 37.336 16.746 37.336 37.336v224c0 20.586-16.746 37.332-37.336 37.332zm-160-266.668A5.337 5.337 0 0 0 32 250.668v224A5.336 5.336 0 0 0 37.332 480h160a5.337 5.337 0 0 0 5.336-5.332v-224a5.338 5.338 0 0 0-5.336-5.336zM474.668 512h-160c-20.59 0-37.336-16.746-37.336-37.332v-96c0-20.59 16.746-37.336 37.336-37.336h160c20.586 0 37.332 16.746 37.332 37.336v96C512 495.254 495.254 512 474.668 512zm-160-138.668a5.338 5.338 0 0 0-5.336 5.336v96a5.337 5.337 0 0 0 5.336 5.332h160a5.336 5.336 0 0 0 5.332-5.332v-96a5.337 5.337 0 0 0-5.332-5.336zm160-74.664h-160c-20.59 0-37.336-16.746-37.336-37.336v-224C277.332 16.746 294.078 0 314.668 0h160C495.254 0 512 16.746 512 37.332v224c0 20.59-16.746 37.336-37.332 37.336zM314.668 32a5.337 5.337 0 0 0-5.336 5.332v224a5.338 5.338 0 0 0 5.336 5.336h160a5.337 5.337 0 0 0 5.332-5.336v-224A5.336 5.336 0 0 0 474.668 32zm0 0"
+                        data-original="#000000" />
+                </svg>
+                Dashboard
+            </a>
+        </li>
+
+        <!-- Job Management -->
+        <li>
+            <a routerLink="/faculty/manage-job-postings" routerLinkActive="bg-[#36336b] text-white"
+                class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-[#36336b] rounded px-4 py-3 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                Manage Job Postings
+            </a>
+        </li>
+
+        <!-- Applications Management -->
+        <li>
+            <a routerLink="/faculty/manage-job-applications" routerLinkActive="bg-[#36336b] text-white"
+                class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-[#36336b] rounded px-4 py-3 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                Manage Applications
+            </a>
+        </li>
+
+        <!-- Student Management -->
+        <li>
+            <a routerLink="/faculty/manage-students" routerLinkActive="bg-[#36336b] text-white"
+                class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-[#36336b] rounded px-4 py-3 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Manage Students
+            </a>
+        </li>
+
+        <!-- Admin-only: Coordinator Management -->
+        <li *ngIf="userData.role === 'ADMIN'">
+            <a routerLink="/admin/manage-users" routerLinkActive="bg-[#36336b] text-white"
+                class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-[#36336b] rounded px-4 py-3 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                Manage Coordinators
+            </a>
+        </li>
+
+        <!-- Add New Job Posting -->
+        <li>
+            <a routerLink="/faculty/add-job-posting" routerLinkActive="bg-[#36336b] text-white"
+                class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-[#36336b] rounded px-4 py-3 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-4" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Add Job Posting
+            </a>
+        </li>
+
+        <!-- Logout -->
+        <li>
+            <button (click)="logout()"
+                class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-[#36336b] w-full rounded px-4 py-3 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 ml-1" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Logout
+            </button>
+        </li>
+    </ul>
+</nav>

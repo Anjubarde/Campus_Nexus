@@ -1,0 +1,95 @@
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <app-faculty-sidebar></app-faculty-sidebar>
+
+    <!-- Main Content -->
+    <div class="p-6 ml-8 bg-white w-full">
+        <div class="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1>Manage Coordinators</h1>
+        </div>
+
+        <section class="main-content w-full overflow-auto p-6">
+            <!-- Search -->
+            <div class="mb-6 flex items-center justify-between">
+                <div class="relative flex items-center">
+                    <input type="text" placeholder="Search coordinators..." [(ngModel)]="searchTerm"
+                        (input)="applySearch()"
+                        class="px-4 py-2 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm transition-all">
+                    <button *ngIf="searchTerm" (click)="clearSearch()"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        ×
+                    </button>
+                </div>
+            </div>
+
+            <!-- Coordinators Table -->
+            <div class="overflow-x-auto rounded-lg border border-gray-200">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="p-4 text-left text-sm font-medium text-white">ID</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Name</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Email</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Role</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Verification Status</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-gray-200">
+                        <tr *ngFor="let coordinator of filteredCoordinators" class="hover:bg-gray-50 even:bg-gray-50">
+                            <td class="p-4 text-sm text-gray-700 font-medium">{{ coordinator.id }}</td>
+                            <td class="p-4 text-sm text-gray-700">{{ coordinator.name }}</td>
+                            <td class="p-4 text-sm text-gray-700">{{ coordinator.email }}</td>
+                            <td class="p-4 text-sm text-gray-700">{{ coordinator.role }}</td>
+                            <td class="p-4">
+                                <span [ngClass]="{
+                                    'bg-green-100 text-green-800': coordinator.varified,
+                                    'bg-yellow-100 text-yellow-800': !coordinator.varified
+                                }" class="px-3 py-1 rounded-full text-xs font-medium">
+                                    {{ coordinator.varified ? 'Verified' : 'Unverified' }}
+                                </span>
+                            </td>
+                            <td class="p-4 flex items-center gap-3">
+                                <!-- Verified State -->
+                                <button *ngIf="coordinator.varified" class="text-green-600 cursor-default p-1" title="Verified" disabled>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            
+                                <!-- Verify Action -->
+                                <button *ngIf="!coordinator.varified" (click)="verifyCoordinator(coordinator.id)"
+                                    class="text-gray-400 hover:text-green-600 p-1 rounded-md hover:bg-green-50 transition-colors"
+                                    title="Verify Coordinator">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </button>
+                            
+                                <!-- Delete Action -->
+                                <button (click)="deleteCoordinator(coordinator.id)"
+                                    class="text-red-400 hover:text-red-600 p-1 rounded-md hover:bg-red-50 transition-colors"
+                                    title="Delete Coordinator">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="filteredCoordinators?.length === 0">
+                            <td colspan="6" class="p-8 text-center text-gray-500">
+                                No coordinators found matching your criteria.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>

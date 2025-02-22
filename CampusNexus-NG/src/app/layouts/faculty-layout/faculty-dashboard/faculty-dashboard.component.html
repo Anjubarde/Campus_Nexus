@@ -1,0 +1,187 @@
+<div class="flex h-screen bg-gray-50">
+    <!-- Sidebar -->
+    <app-faculty-sidebar></app-faculty-sidebar>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ userName }} ({{ userRole }}),</h1>
+                <p class="text-gray-600 mt-1">Dashboard Overview</p>
+            </div>
+            <button (click)="logout()"
+                class="flex items-center px-4 py-2 bg-white border border-red-200 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Logout
+            </button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Students Card -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Total Students</p>
+                        <p class="text-3xl font-bold text-gray-800">{{ stats.totalStudents }}</p>
+                    </div>
+                    <div class="p-3 bg-blue-100 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex items-center text-sm text-green-600">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        +{{ stats.totalStudents }} new students
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Jobs Card -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Active Jobs</p>
+                        <p class="text-3xl font-bold text-gray-800">{{ stats.activeJobs }}</p>
+                    </div>
+                    <div class="p-3 bg-green-100 rounded-full">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex items-center text-sm text-blue-600">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        +{{ stats.activeJobs }} active jobs
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Card -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Total Applications</p>
+                        <p class="text-3xl font-bold text-gray-800">{{ stats.totalApplications }}</p>
+                    </div>
+                    <div class="p-3 bg-purple-100 rounded-full">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex items-center text-sm text-purple-600">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        +{{ stats.totalApplications }} total job applications
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Jobs Card -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-1">Total Jobs</p>
+                        <p class="text-3xl font-bold text-gray-800">{{ stats.totalJobs }}</p>
+                    </div>
+                    <div class="p-3 bg-blue-100 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex items-center text-sm text-blue-600">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        +{{ stats.totalJobs }} total jobs
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <a routerLink="/faculty/add-job-posting"
+                class="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:border-blue-200 hover:bg-blue-50 transition-all group">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-100 rounded-lg mr-4 group-hover:bg-blue-200 transition-colors">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Post New Job</h3>
+                        <p class="text-sm text-gray-600">Create a new job posting for students</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Recent Activity -->
+        <!-- <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold mb-4">Recent Activities</h2>
+            <div class="space-y-4">
+                <div *ngFor="let activity of recentActivities"
+                    class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="flex items-center">
+                        <div [ngClass]="{
+                            'bg-blue-100': activity.type === 'job',
+                            'bg-green-100': activity.type === 'student'
+                        }" class="p-2 rounded-lg mr-4">
+                            <svg class="w-5 h-5" [ngClass]="{
+                                'text-blue-600': activity.type === 'job',
+                                'text-green-600': activity.type === 'student'
+                            }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path *ngIf="activity.type === 'job'" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                <path *ngIf="activity.type === 'student'" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800">{{ activity.description }}</p>
+                            <p class="text-sm text-gray-500">{{ activity.timestamp | date:'medium' }}</p>
+                        </div>
+                    </div>
+                    <span [ngClass]="{
+                        'text-blue-600': activity.type === 'job',
+                        'text-green-600': activity.type === 'student'
+                    }" class="text-sm font-medium">
+                        {{ activity.type | titlecase }}
+                    </span>
+                </div>
+                <p *ngIf="recentActivities.length === 0" class="text-center text-gray-500 py-4">
+                    No recent activities found
+                </p>
+            </div>
+        </div> -->
+    </div>
+</div>

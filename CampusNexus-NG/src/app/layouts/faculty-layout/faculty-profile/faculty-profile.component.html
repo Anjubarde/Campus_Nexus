@@ -1,0 +1,65 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <a routerLink="/faculty/dashboard"
+                class="inline-flex items-center px-4 py-2 bg-white border border-sky-600 text-sky-600 rounded-lg hover:bg-sky-50 transition-colors duration-200 font-medium">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Dashboard
+            </a>
+            <h1 class="text-3xl font-bold text-gray-800 text-center sm:text-left">Update Profile</h1>
+        </div>
+
+        <!-- Profile Update Form -->
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="bg-white rounded-lg shadow-md p-6">
+            <!-- Success/Error Messages -->
+            <div *ngIf="successMessage" class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                {{ successMessage }}
+            </div>
+            <div *ngIf="errorMessage" class="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
+                {{ errorMessage }}
+            </div>
+
+            <!-- Name Input -->
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-medium mb-2">Full Name</label>
+                <input type="text" formControlName="name"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+                    [ngClass]="{
+                        'border-gray-300': !profileForm.get('name')?.invalid,
+                        'border-red-500': profileForm.get('name')?.invalid && profileForm.get('name')?.touched
+                    }">
+                <div *ngIf="profileForm.get('name')?.errors && profileForm.get('name')?.touched"
+                    class="text-red-500 text-sm mt-1">
+                    <div *ngIf="profileForm.get('name')?.errors?.['required']">Name is required</div>
+                </div>
+            </div>
+
+            <!-- Email Input -->
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
+                <input type="email" formControlName="email"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+                    [ngClass]="{
+                        'border-gray-300': !profileForm.get('email')?.invalid,
+                        'border-red-500': profileForm.get('email')?.invalid && profileForm.get('email')?.touched
+                    }">
+                <div *ngIf="profileForm.get('email')?.errors && profileForm.get('email')?.touched"
+                    class="text-red-500 text-sm mt-1">
+                    <div *ngIf="profileForm.get('email')?.errors?.['required']">Email is required</div>
+                    <div *ngIf="profileForm.get('email')?.errors?.['email']">Please enter a valid email address</div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" [disabled]="profileForm.invalid || isSubmitting"
+                class="w-full bg-sky-600 text-white py-2 px-6 rounded-lg hover:bg-sky-700 transition-colors duration-200 font-medium disabled:bg-sky-300 disabled:cursor-not-allowed">
+                <span *ngIf="!isSubmitting">Update Profile</span>
+                <span *ngIf="isSubmitting">Updating...</span>
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <app-faculty-sidebar></app-faculty-sidebar>
+
+    <!-- Main Content -->
+    <div class="p-6 ml-8 bg-white w-full">
+        <div class="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1>Manage Job Postings</h1>
+        </div>
+
+        <section class="main-content w-full overflow-auto p-6">
+            <!-- Search and Filters -->
+            <div class="mb-6 flex items-center justify-between">
+                <div class="relative flex items-center">
+                    <input type="text" placeholder="Search jobs..." [(ngModel)]="searchTerm" (input)="applySearch()"
+                        class="px-4 py-2 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm transition-all">
+                    <button *ngIf="searchTerm" (click)="clearSearch()"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        ×
+                    </button>
+                </div>
+                <label class="flex items-center space-x-2 text-sm text-gray-600 cursor-pointer">
+                    <input type="checkbox" [(ngModel)]="isChecked" (change)="onCheckboxChange()"
+                        class="w-4 h-4 text-sky-600 border-gray-300 rounded focus:ring-sky-500">
+                    <span>Show Active Jobs Only</span>
+                </label>
+            </div>
+
+            <!-- Jobs Table -->
+            <div class="overflow-x-auto rounded-lg border border-gray-200">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="p-4 text-left text-sm font-medium text-white">Job Title</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Company</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Location</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">CTC</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Posted By</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Status</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-gray-200">
+                        <tr *ngFor="let job of filteredJobPostings" class="hover:bg-gray-50 even:bg-gray-50">
+                            <td class="p-4 text-sm text-gray-700 font-medium">{{ job.job_title }}</td>
+                            <td class="p-4 text-sm text-gray-700">
+                                <a [href]="job.company_url" target="_blank"
+                                    class="text-sky-600 hover:text-sky-800 hover:underline">
+                                    {{ job.companyName }}
+                                </a>
+                            </td>
+                            <td class="p-4 text-sm text-gray-700">{{ job.job_location }}</td>
+                            <td class="p-4 text-sm text-gray-700 font-medium">{{ job.ctc }}</td>
+                            <td class="p-4 text-sm text-gray-700">{{ job.postedByName }}</td>
+                            <td class="p-4">
+                                <span [ngClass]="{
+                                    'bg-green-100 text-green-800': job.active,
+                                    'bg-red-100 text-red-800': !job.active
+                                }" class="px-3 py-1 rounded-full text-xs font-medium">
+                                    {{ job.active ? 'Active' : 'Inactive' }}
+                                </span>
+                            </td>
+                            <td class="p-4">
+                                <button [routerLink]="['/faculty/job-preview/', job.id]"
+                                    class="text-sky-600 hover:text-sky-800" title="View Details">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </button>
+                                <button [routerLink]="['/faculty/update-posting/', job.id]"
+                                    class="text-sky-600 hover:text-sky-800 ml-3" title="View Details">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="filteredJobPostings?.length === 0">
+                            <td colspan="7" class="p-8 text-center text-gray-500">
+                                No job postings found matching your criteria.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>

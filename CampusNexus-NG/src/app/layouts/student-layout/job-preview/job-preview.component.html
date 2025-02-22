@@ -1,0 +1,110 @@
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <app-student-sidebar></app-student-sidebar>
+
+    <!-- Main Content -->
+    <div class="flex-1 px-8 py-4 bg-gray-50 overflow-y-auto">
+        <div class="max-w-4xl mx-auto">
+            <div>
+                <button (click)="goBack()"
+                    class="inline-flex items-center text-sky-600 hover:text-sky-800 transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                        </path>
+                    </svg>
+                    Back
+                </button>
+            </div>
+            <!-- Header Section -->
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ job?.job_title }}</h1>
+                <h2 class="text-2xl text-blue-600 font-semibold">{{ job?.companyName }}</h2>
+                <div class="mt-4 flex items-center justify-center space-x-4">
+                    <span
+                        [ngClass]="job?.active == true ? 'bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm' : 'bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm'">
+                        {{ job?.active ? 'Active' : 'Inactive' }}
+                    </span>
+                    <span class="text-gray-600">Posted by: {{ job?.postedByName }}</span>
+                </div>
+            </div>
+
+            <!-- Job Details Card -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Left Column -->
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="text-gray-700">{{ job?.job_location }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            <span class="text-gray-700">{{ job?.ctc }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span class="text-gray-700">
+                                {{ job?.startDate | date }} - {{ job?.endDate | date }}
+                            </span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            <a [href]="job?.company_url" target="_blank"
+                                class="text-blue-600 hover:text-blue-800 transition-colors">
+                                Visit Company Website
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description Sections -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Job Description</h3>
+                    <p class="text-gray-700 leading-relaxed">{{ job?.job_description }}</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Eligibility Criteria</h3>
+                    <p class="text-gray-700 leading-relaxed">{{ job?.eligibilityCriteria }}</p>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="mt-8 text-center" *ngIf="job?.active">
+                <button
+                    class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg font-semibold"
+                    (click)="applyJob(job?.id)">
+                    Apply Now
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

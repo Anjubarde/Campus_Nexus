@@ -1,0 +1,35 @@
+:host {
+    display: block;
+    width: 260px;
+    height: 100vh;
+    position: relative;
+    background: #2e2e48;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+}
+
+.sidebar-open {
+    transform: translateX(0);
+}
+
+/* Hide the sidebar for mobile devices */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%) !important;
+    }
+}
+
+.active {
+    background-color: #36336b;
+    color: white;
+}

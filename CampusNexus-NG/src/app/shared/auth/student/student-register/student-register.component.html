@@ -1,0 +1,135 @@
+<section class="bg-gray-50">
+    <div class="flex flex-col items-center justify-center px-6 py-8 h-5/6 mt-8">
+        <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-lg xl:p-0">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                    Create Student Account
+                </h1>
+                <form [formGroup]="studentForm" class="space-y-6" (ngSubmit)="onSubmit()">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Register ID -->
+                        <div>
+                            <label for="registerId" class="block mb-2 text-sm font-medium text-gray-900">
+                                Register Number</label>
+                            <input type="text" id="registerId" formControlName="register_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="12345678" />
+                            <small
+                                *ngIf="studentForm.get('register_id')?.errors?.['required'] && studentForm.get('register_id')?.touched"
+                                class="text-red-500">
+                                Register Number is required
+                            </small>
+                            <small
+                                *ngIf="studentForm.get('register_id')?.errors?.['pattern'] && studentForm.get('register_id')?.touched"
+                                class="text-red-500">
+                                Register Number must be 8 digits
+                            </small>
+                            <small *ngIf="studentForm.get('register_id')?.errors?.['duplicate']" class="text-red-500">
+                                {{ studentForm.get('register_id')?.errors?.['duplicate'] }}
+                            </small>
+                        </div>
+
+                        <!-- Full Name -->
+                        <div>
+                            <label for="fullName" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
+                            <input type="text" id="fullName" formControlName="fullName"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="John Doe" />
+                            <small
+                                *ngIf="studentForm.get('fullName')?.errors?.['required'] && studentForm.get('fullName')?.touched"
+                                class="text-red-500">
+                                Full Name is required
+                            </small>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                            <input type="email" id="email" formControlName="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="name@example.com" />
+                            <small
+                                *ngIf="studentForm.get('email')?.errors?.['required'] && studentForm.get('email')?.touched"
+                                class="text-red-500">
+                                Email is required
+                            </small>
+                            <small
+                                *ngIf="studentForm.get('email')?.errors?.['email'] && studentForm.get('email')?.touched"
+                                class="text-red-500">
+                                Invalid email format
+                            </small>
+                            <small *ngIf="studentForm.get('email')?.errors?.['duplicate']" class="text-red-500">
+                                {{ studentForm.get('email')?.errors?.['duplicate'] }}
+                            </small>
+                        </div>
+
+                        <!-- Mobile Number -->
+                        <div>
+                            <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900">Mobile
+                                Number</label>
+                            <input type="text" id="mobile" formControlName="mobile"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="9876543210" />
+                            <small
+                                *ngIf="studentForm.get('mobile')?.errors?.['required'] && studentForm.get('mobile')?.touched"
+                                class="text-red-500">
+                                Mobile number is required
+                            </small>
+                            <small
+                                *ngIf="studentForm.get('mobile')?.errors?.['pattern'] && studentForm.get('mobile')?.touched"
+                                class="text-red-500">
+                                Mobile number must be 10 digits
+                            </small>
+                            <small *ngIf="studentForm.get('mobile')?.errors?.['duplicate']" class="text-red-500">
+                                {{ studentForm.get('mobile')?.errors?.['duplicate'] }}
+                            </small>
+                        </div>
+
+                        <!-- Stream -->
+                        <div>
+                            <label for="stream" class="block mb-2 text-sm font-medium text-gray-900">Select
+                                Stream</label>
+                            <select id="streams" formControlName="streams"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                                <option value="" disabled>Select your stream</option>
+                                <option *ngFor="let strm of streams_data" [value]="strm">{{ strm }}</option>
+                            </select>
+                            <small
+                                *ngIf="studentForm.get('streams')?.errors?.['required'] && studentForm.get('streams')?.touched"
+                                class="text-red-500">
+                                Stream is required
+                            </small>
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                            <input type="password" id="password" formControlName="password"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="••••••••" />
+                            <small
+                                *ngIf="studentForm.get('password')?.errors?.['required'] && studentForm.get('password')?.touched"
+                                class="text-red-500">
+                                Password is required
+                            </small>
+                            <small
+                                *ngIf="studentForm.get('password')?.errors?.['pattern'] && studentForm.get('password')?.touched"
+                                class="text-red-500">
+                                Password must include at least 8 characters, 1 number, 1 special character, and 1 letter
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" [disabled]="!studentForm.valid" [ngClass]="{
+                            'bg-gray-400 cursor-not-allowed': studentForm.invalid,
+                            'bg-sky-700 hover:bg-sky-800 cursor-pointer': studentForm.valid
+                        }"
+                        class="w-full text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Register
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,88 @@
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <app-faculty-sidebar></app-faculty-sidebar>
+
+    <!-- Main Content -->
+    <div class="p-6 ml-8 bg-white w-full">
+        <div class="text-3xl font-bold text-gray-900 text-center mb-8">
+            <h1>Manage Students</h1>
+        </div>
+
+        <section class="main-content w-full overflow-auto p-6">
+            <!-- Search and Filters -->
+            <div class="mb-6 flex items-center justify-between">
+                <div class="relative flex items-center">
+                    <input type="text" placeholder="Search students..." [(ngModel)]="searchTerm" (input)="applySearch()"
+                        class="px-4 py-2 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm transition-all">
+                    <button *ngIf="searchTerm" (click)="clearSearch()"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        ×
+                    </button>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button (click)="exportToCSV()"
+                        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm">
+                        Export to CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Students Table -->
+            <div class="overflow-x-auto rounded-lg border border-gray-200">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="p-4 text-left text-sm font-medium text-white">Register ID</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Full Name</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Email</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Mobile</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Stream</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Profile</th>
+                            <th class="p-4 text-left text-sm font-medium text-white">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-gray-200">
+                        <tr *ngFor="let student of filteredStudents" class="hover:bg-gray-50 even:bg-gray-50">
+                            <td class="p-4 text-sm text-gray-700 font-medium">{{ student.register_id }}</td>
+                            <td class="p-4 text-sm text-gray-700">{{ student.fullName }}</td>
+                            <td class="p-4 text-sm text-gray-700">{{ student.email }}</td>
+                            <td class="p-4 text-sm text-gray-700">{{ student.mobile }}</td>
+                            <td class="p-4 text-sm text-gray-700">
+                                <span class="px-2 py-1 bg-gray-100 rounded-full text-xs">
+                                    {{ student.streams | titlecase }}
+                                </span>
+                            </td>
+                            <td class="p-4 text-sm text-gray-700 text-center">
+                                <button [routerLink]="['/faculty/student-preview/', student.id]"
+                                    class="text-sky-600 hover:text-sky-800" title="View Details">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </button>
+                            </td>
+                            <td class="p-4 text-sm text-gray-700 text-center">
+                                <button (click)="deleteStudent(student.id)" class="text-red-600 hover:text-red-800">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="filteredStudents?.length === 0">
+                            <td colspan="8" class="p-8 text-center text-gray-500">
+                                No students found matching your criteria.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
