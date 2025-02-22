@@ -1,0 +1,8 @@
+package com.campus.model;
+
+public class DashboardStats {
+    private int totalStudents;
+    private int totalJobs;
+    private int totalApplications;
+    private int activeJobs;
+}
