@@ -18,7 +18,7 @@
 
 ## 👥 Contributors
 
-- **[Mayur Dehade](mailto:dehademayur9@gmail.com)**
+- **Anjali Barde**
 
 ---
 
